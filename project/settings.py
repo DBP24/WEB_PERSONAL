@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -156,6 +157,14 @@ CRISPY_TEMPLATE_PACK = "tailwind"
 # archivos de media
 STATIC_URL = '/static/'  # URL pública para acceder a los archivos estáticos
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
+if not DEBUG:
+    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Cuanndo usas la Abstracion de User a otro modelo 
 # ESTA LINEA PERMITE LOGEARTE CON OTRO MODELO
