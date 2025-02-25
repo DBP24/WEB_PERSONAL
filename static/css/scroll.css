@@ -1,0 +1,74 @@
+/* Estilos personalizados para la barra de desplazamiento */
+/* Aplicar a todo el sitio */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Fondo de la barra de desplazamiento */
+::-webkit-scrollbar-track {
+  background-color: #1a1a1a;
+  border-radius: 8px;
+}
+
+/* Estilo del "thumb" (la parte móvil de la barra) */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #6b46c1, #10b981);
+  border-radius: 8px;
+  border: 2px solid #1a1a1a;
+}
+
+/* Estilo del thumb al pasar el cursor por encima */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #805ad5, #0d9488);
+}
+
+/* Esquinas de la barra de desplazamiento */
+::-webkit-scrollbar-corner {
+  background: #1a1a1a;
+}
+
+/* Para Firefox (versión 64 y superior) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #6b46c1 #1a1a1a;
+}
+
+/* Asegurarse de que funcione en todos los navegadores */
+@supports not (scrollbar-color: #6b46c1 #1a1a1a) {
+  /* Fallback para navegadores que no soportan la personalización moderna */
+  /* Esto mantiene un estilo decente en navegadores más antiguos */
+  html {
+    scrollbar-face-color: #6b46c1;
+    scrollbar-track-color: #1a1a1a;
+    scrollbar-arrow-color: #10b981;
+    scrollbar-shadow-color: #4a5568;
+  }
+}
+
+/* Implementación mediante clase para aplicar a elementos específicos */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #6b46c1 #1a1a1a;
+}
+
+/* Para asegurar que el scrollbar personalizado se aplica correctamente en todos los navegadores */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #6b46c1, #10b981);
+    border-radius: 8px;
+    border: 2px solid #1a1a1a;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #805ad5, #0d9488);
+  }
+}

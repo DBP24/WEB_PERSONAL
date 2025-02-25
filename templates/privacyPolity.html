@@ -1,0 +1,465 @@
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/whatsapp.css' %}">
+<link rel="stylesheet" href="{% static 'css/scroll.css' %}">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Política de Privacidad - Sitio web personal basada en la legislación peruana">
+    <title>Política de Privacidad - Perú</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --text-color: #333;
+            --light-text: #666;
+            --background-color: #f9f9f9;
+            --container-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --accent-color: #2980b9;
+            --success-color: #27ae60;
+            --peru-red: #D91023;
+            --peru-flag-accent: rgba(217, 16, 35, 0.8);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--peru-red) 50%, white 50%);
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
+        
+        .last-updated {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 0.5rem;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--container-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .intro {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.8rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin: 1rem 0 1.5rem 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight {
+            background-color: rgba(52, 152, 219, 0.1);
+            padding: 1.5rem;
+            border-left: 4px solid var(--secondary-color);
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .peru-highlight {
+            background-color: rgba(217, 16, 35, 0.05);
+            padding: 1.5rem;
+            border-left: 4px solid var(--peru-red);
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .back-to-site {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            margin-top: 2rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .back-to-site:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .contact-form {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: rgba(52, 152, 219, 0.05);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        button {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #219653;
+        }
+        
+        .success-message {
+            display: none;
+            padding: 1rem;
+            background-color: rgba(39, 174, 96, 0.1);
+            border-left: 4px solid var(--success-color);
+            margin-top: 1rem;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+            background-color: var(--primary-color);
+            color: white;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--peru-red) 50%, white 50%);
+        }
+        
+        footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .divider {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 2rem 0;
+        }
+        
+        .peru-law-reference {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.2rem;
+            }
+            
+            .contact-form {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Política de Privacidad</h1>
+        <div class="last-updated">Última actualización: 25 de febrero de 2025</div>
+    </header>
+    
+    <div class="container">
+        <section class="intro">
+            <p>Bienvenido a mi sitio web personal. Tu privacidad es importante para mí. Esta Política de Privacidad explica cómo recopilo, uso, divulgo y protejo tu información cuando visitas mi sitio web personal, que incluye imágenes, información personal y proyectos.</p>
+            <p>Por favor, tómate un momento para leer detenidamente esta política para entender cómo trato tus datos personales.</p>
+            
+            <div class="peru-highlight">
+                <h3>Base Legal en Perú</h3>
+                <p>Esta Política de Privacidad ha sido elaborada en cumplimiento con la Ley N° 29733, Ley de Protección de Datos Personales, su Reglamento aprobado mediante Decreto Supremo N° 003-2013-JUS, y demás normas complementarias emitidas por la Autoridad Nacional de Protección de Datos Personales del Ministerio de Justicia y Derechos Humanos del Perú.</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2>1. Información que recopilo</h2>
+            
+            <h3>1.1 Información proporcionada voluntariamente</h3>
+            <p>Puedo recopilar información personal que me proporcionas voluntariamente cuando interactúas con mi sitio web, como:</p>
+            <ul>
+                <li>Información de contacto (nombre, apellidos, dirección de correo electrónico, número telefónico) cuando te comunicas conmigo a través del formulario de contacto, whatsapp, gmail u otros</li>
+                <li>Comentarios o mensajes que dejas en mi sitio web</li>
+                <li>Información que proporcionas al comunicarte</li>
+            </ul>
+            <p class="peru-law-reference">Conforme al Principio de Consentimiento establecido en el artículo 5° de la Ley N° 29733.</p>
+            
+            <h3>1.2 Información recopilada automáticamente</h3>
+            <p>Cuando visitas mi sitio web, cierta información puede ser recopilada automáticamente, incluyendo:</p>
+            <ul>
+                <li>Información de registro del servidor como tu dirección IP, tipo de navegador, páginas de referencia/salida, sistema operativo</li>
+                <li>Información sobre tu visita, incluyendo las páginas que visitas, el tiempo que pasas en el sitio, y la fecha y hora de tu visita</li>
+                <li>Cookies y tecnologías similares (ver sección de Cookies más adelante)</li>
+            </ul>
+            <p class="peru-law-reference">De acuerdo al Principio de Finalidad y Proporcionalidad establecido en los artículos 6° y 7° de la Ley N° 29733.</p>
+        </section>
+        
+        <section>
+            <h2>2. Cómo utilizo tu información</h2>
+            <p>Utilizo la información recopilada para los siguientes propósitos:</p>
+            <ul>
+                <li>Proporcionar, operar y mantener mi sitio web personal</li>
+                <li>Responder a tus consultas y solicitudes</li>
+                <li>Entender y analizar cómo utilizas mi sitio web para mejorar la experiencia del usuario</li>
+                <li>Desarrollar nuevos productos, servicios, características y funcionalidades</li>
+                <li>Comunicarme contigo, para proporcionarte actualizaciones, información relacionada con el sitio web, y para fines de marketing y promoción</li>
+                <li>Encontrar y prevenir fraudes</li>
+                <li>Para cualquier otro propósito que te haya comunicado en el momento de la recopilación de la información</li>
+            </ul>
+            <p class="peru-law-reference">Cumpliendo con el Principio de Finalidad establecido en el artículo 6° de la Ley N° 29733.</p>
+            
+            <div class="peru-highlight">
+                <h3>Consentimiento y tratamiento de datos personales</h3>
+                <p>Al utilizar este sitio web y proporcionar tus datos personales, otorgas tu consentimiento libre, previo, expreso, informado e inequívoco para el tratamiento de tus datos personales conforme a las finalidades descritas en esta Política de Privacidad.</p>
+                <p>En todo momento, tienes derecho a revocar el consentimiento otorgado, conforme al procedimiento establecido en la sección de Derechos ARCO.</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2>3. Cookies y tecnologías similares</h2>
+            <p>Utilizo cookies y tecnologías de seguimiento similares para rastrear la actividad en mi sitio web y almacenar cierta información. Las cookies son archivos con una pequeña cantidad de datos que pueden incluir un identificador único anónimo.</p>
+            
+            <h3>3.1 Tipos de cookies que utilizo</h3>
+            <ul>
+                <li><strong>Cookies necesarias:</strong> Estas cookies son esenciales para que puedas navegar por el sitio web y utilizar sus funciones. Sin estas cookies, no podría proporcionar ciertos servicios que has solicitado.</li>
+                <li><strong>Cookies de preferencias:</strong> Estas cookies me permiten recordar las elecciones que has hecho y proporcionar funciones mejoradas y más personales.</li>
+                <li><strong>Cookies de análisis:</strong> Utilizo herramientas de análisis como Google Analytics para recopilar y analizar información sobre cómo utilizas mi sitio web. Estas cookies ayudan a mejorar mi sitio web y tu experiencia.</li>
+            </ul>
+            
+            <h3>3.2 Control de cookies</h3>
+            <p>Puedes instruir a tu navegador para que rechace todas las cookies o para que te indique cuándo se envía una cookie. Sin embargo, si no aceptas cookies, es posible que no puedas utilizar algunas partes de mi sitio web.</p>
+            <p class="peru-law-reference">De conformidad con la Directiva de Uso de Cookies, Dispositivos de Almacenamiento y Recuperación de Datos en Equipos Terminales de la Autoridad Nacional de Protección de Datos Personales.</p>
+        </section>
+        
+        <section>
+            <h2>4. Compartir y divulgar información</h2>
+            <p>No vendo tu información personal a terceros. Puedo compartir tu información personal en las siguientes situaciones:</p>
+            
+            <h3>4.1 Proveedores de servicios</h3>
+            <p>Puedo compartir tu información con proveedores de servicios de terceros que realicen servicios en mi nombre, como análisis de datos, alojamiento web, servicio de correo electrónico, servicio al cliente, y propósitos de marketing.</p>
+            
+            <h3>4.2 Cumplimiento legal</h3>
+            <p>Puedo divulgar tu información donde sea requerido por ley o si creo de buena fe que dicha acción es necesaria para:</p>
+            <ul>
+                <li>Cumplir con una obligación legal</li>
+                <li>Proteger y defender mis derechos o propiedad</li>
+                <li>Investigar, prevenir o tomar acción respecto a posibles infracciones en relación con el sitio web</li>
+                <li>Proteger la seguridad personal de los usuarios del sitio web o del público</li>
+                <li>Protegerme contra la responsabilidad legal</li>
+            </ul>
+            
+           </section>
+        
+        <section>
+            <h2>5. Seguridad de datos</h2>
+            <p>La seguridad de tu información personal es importante para mí. Utilizo medidas de seguridad técnicas y organizativas adecuadas para proteger tu información personal contra pérdida, uso indebido y acceso no autorizado, divulgación, alteración y destrucción.</p>
+            <p>Sin embargo, por favor ten en cuenta que ningún método de transmisión por Internet o método de almacenamiento electrónico es 100% seguro. Si bien me esfuerzo por utilizar medios comercialmente aceptables para proteger tu información personal, no puedo garantizar su seguridad absoluta.</p>
+            <p class="peru-law-reference">En cumplimiento del Principio de Seguridad establecido en el artículo 9° de la Ley N° 29733 y la Directiva de Seguridad emitida por la Autoridad Nacional de Protección de Datos Personales.</p>
+        </section>
+        
+        <section>
+            <h2>6. Derechos ARCO</h2>
+            <p>Conforme a la Ley de Protección de Datos Personales del Perú (Ley N° 29733), tienes los siguientes derechos respecto a tus datos personales:</p>
+            <ul>
+                <li><strong>Derecho de Acceso:</strong> Tienes derecho a obtener información sobre tus datos personales objeto de tratamiento, así como conocer la finalidad para la cual son utilizados.</li>
+                <li><strong>Derecho de Rectificación:</strong> Puedes solicitar la actualización, inclusión o modificación de tus datos personales cuando éstos sean parcial o totalmente inexactos, incompletos o desactualizados.</li>
+                <li><strong>Derecho de Cancelación:</strong> Puedes solicitar la supresión o cancelación de tus datos personales cuando consideres que ya no son necesarios para la finalidad para la que fueron recopilados.</li>
+                <li><strong>Derecho de Oposición:</strong> Tienes derecho a oponerte al tratamiento de tus datos personales cuando no hayas autorizado su recopilación o cuando existan motivos fundados para ello.</li>
+            </ul>
+            
+            <div class="peru-highlight">
+                <h3>Procedimiento para ejercer tus Derechos ARCO</h3>
+                <p>Para ejercer cualquiera de tus derechos ARCO, puedes enviar una solicitud escrita a mi dirección de correo electrónico bonattipaajuelodiego2406@gmial.com, incluyendo la siguiente información:</p>
+                <ol>
+                    <li>Nombres y apellidos completos</li>
+                    <li>Documento de identidad (DNI, Carné de Extranjería o Pasaporte)</li>
+                    <li>Dirección de correo electrónico u otro medio para recibir respuesta</li>
+                    <li>Derecho que deseas ejercer (Acceso, Rectificación, Cancelación u Oposición)</li>
+                    <li>Descripción clara y precisa de los datos personales respecto de los cuales buscas ejercer alguno de los derechos</li>
+                </ol>
+                <p>Responderé a tu solicitud en un plazo máximo de diez 5 días hábiles contados desde el día siguiente de presentada la solicitud. Este plazo podrá ser ampliado por un período igual, siempre que existan circunstancias que así lo justifiquen, lo cual te será comunicado oportunamente.</p>
+            </div>
+            <p class="peru-law-reference">De acuerdo a lo establecido en el Título III de la Ley N° 29733 y en el Título III de su Reglamento, aprobado mediante Decreto Supremo N° 003-2013-JUS.</p>
+        </section>
+        
+        <section>
+            <h2>7. Enlaces a sitios web de terceros</h2>
+            <p>Mi sitio web puede contener enlaces a otros sitios web que no son operados por mí. Si haces clic en un enlace de terceros, serás dirigido al sitio de ese tercero. Te recomiendo encarecidamente que revises la Política de Privacidad de cada sitio que visites.</p>
+            <p>No tengo control sobre y no asumo responsabilidad por el contenido, políticas de privacidad o prácticas de sitios web o servicios de terceros.</p>
+        </section>
+        
+        <section>
+            <h2>8. Privacidad de los menores</h2>
+            <p>Mi sitio web no está dirigido a personas menores de 14 años. No recopilo a sabiendas información personal identificable de menores de 14 años sin el consentimiento verificable de sus padres o tutores legales. Si eres padre/madre o tutor y sabes que tu hijo nos ha proporcionado información personal, por favor contáctame para que pueda tomar las medidas necesarias.</p>
+            <p class="peru-law-reference">De acuerdo con lo establecido en el artículo 13° de la Ley N° 29733 sobre el tratamiento de datos personales de menores.</p>
+        </section>
+        
+        <section>
+            <h2>9. Banco de Datos Personales</h2>
+            <p>En cumplimiento de la Ley de Protección de Datos Personales y su Reglamento, declaro que mantengo un Banco de Datos Personales denominado "Usuarios Web", debidamente registrado ante la Autoridad Nacional de Protección de Datos Personales del Ministerio de Justicia y Derechos Humanos.</p>
+            <p>El titular y encargado de este banco de datos personales es [Tu Nombre Completo], con domicilio en [Tu Dirección], Perú.</p>
+        </section>
+        
+        <section>
+            <h2>10. Cambios a esta Política de Privacidad</h2>
+            <p>Puedo actualizar esta Política de Privacidad de vez en cuando. Te notificaré cualquier cambio publicando la nueva Política de Privacidad en esta página y actualizando la fecha de "última actualización" al principio de esta Política de Privacidad.</p>
+            <p>Se te aconseja revisar esta Política de Privacidad periódicamente para cualquier cambio. Los cambios a esta Política de Privacidad son efectivos cuando se publican en esta página.</p>
+            <p class="peru-law-reference">En cumplimiento del Principio de Información establecido en el artículo 18° de la Ley N° 29733.</p>
+        </section>
+        
+  
+        <div class="divider"></div>
+        
+        <a href="/" class="back-to-site">Volver al sitio principal</a>
+    </div>
+
+        <a href="/" class="retrun-btn" target="_blank">
+            <img class="w-6 h-6" src="{% static 'svg/website/return.svg' %}" alt="LinkedIn">
+        </a>
+
+    <footer>
+        <p>&copy; 2025 Diego Antonio Bonatti Pajuelo. Todos los derechos reservados.</p>
+        <p><a href="/">Página Principal</a> | <a href="/terminos-servicio.html">Términos de Servicio</a></p>
+    </footer>
+    
+    <script>
+        document.getElementById('privacy-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Aquí normalmente se enviaría el formulario a un backend
+            // Simulando el envío para esta demostración
+            
+            // Limpiar campos
+            document.getElementById('name').value = '';
+            document.getElementById('document').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('subject').value = '';
+            document.getElementById('message').value = '';
+            
+            // Mostrar mensaje de éxito
+            document.getElementById('success-message').style.display = 'block';
+            
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(function() {
+                document.getElementById('success-message').style.display = 'none';
+            }, 5000);
+        });
+    </script>
+</body>
+</html>

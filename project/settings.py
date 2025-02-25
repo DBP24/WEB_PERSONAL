@@ -26,8 +26,10 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
+# DEBUG = False
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+# ALLOWED_HOSTS = ['*'] 
 
 
 # Application definition
@@ -125,7 +127,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -133,8 +135,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # login
-LOGIN_REDIRECT_URL = "dashboard"  # DONDE LLEGA DESPUES DE LOGEARTE
-LOGOUT_REDIRECT_URL = "login"  # DONDE LLEGA DESPUES DE DESLOGEARTE
+# LOGIN_REDIRECT_URL = "dashboard"  # DONDE LLEGA DESPUES DE LOGEARTE
+# LOGOUT_REDIRECT_URL = "login"  # DONDE LLEGA DESPUES DE DESLOGEARTE
 
 # configuracion del mixins en bloqueo de login
 LOGIN_URL = "login"
@@ -149,4 +151,4 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Cuanndo usas la Abstracion de User a otro modelo 
 # ESTA LINEA PERMITE LOGEARTE CON OTRO MODELO
-AUTH_USER_MODEL = 'users.CreationUserModel'
+# AUTH_USER_MODEL = 'users.CreationUserModel'

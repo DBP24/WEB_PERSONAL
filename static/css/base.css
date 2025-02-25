@@ -1,0 +1,180 @@
+ /* Estilos base */
+ html {
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    
+  }
+  
+  /* Animaciones mejoradas */
+  .nav-link {
+    position: relative;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background: linear-gradient(to right, #3B82F6, #8B5CF6);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  .nav-link:hover::after {
+    width: 70%;
+  }
+  
+  /* Efecto para el fondo */
+  .bg-gradient-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.9));
+    z-index: -1;
+  }
+  
+  /* Estilos para el header con scroll */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    transition: all 0.4s ease;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  
+  .header-hidden {
+    transform: translateY(-100%);
+  }
+  
+  .header-scrolled {
+    background-color: rgba(17, 24, 39, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  /* Espacio para compensar el header fijo */
+  .header-spacer {
+    height: 76px;
+  }
+  
+  /* Estilos para menú móvil */
+  .mobile-menu-container {
+    position: fixed;
+    top: 76px;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: rgba(17, 24, 39, 0.98);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    transition: height 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 40;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .mobile-menu-container.active {
+    height: calc(100vh - 76px);
+    overflow-y: auto;
+  }
+  
+  .mobile-menu {
+    padding: 2rem 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition-delay: 0.1s;
+  }
+  
+  .mobile-menu-container.active .mobile-menu {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Botón hamburguesa mejorado */
+  .hamburger-button {
+    position: relative;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+  }
+  
+  .hamburger-button:focus {
+    outline: none;
+  }
+  
+  .hamburger-button span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #60A5FA;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  
+  .hamburger-button.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  
+  .hamburger-button.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger-button.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  
+  /* Media queries para responsividad */
+  @media (max-width: 768px) {
+    .desktop-nav {
+      display: none;
+    }
+    
+    .hamburger-button {
+      display: flex;
+    }
+    
+    .mobile-link {
+      display: block;
+      padding: 1rem 0;
+      font-size: 1.125rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-link:last-child {
+      border-bottom: none;
+    }
+    
+    .mobile-link:hover {
+      color: #F3F4F6;
+      transform: translateX(5px);
+    }
+    
+    .mobile-social {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(59, 130, 246, 0.15);
+    }
+  }

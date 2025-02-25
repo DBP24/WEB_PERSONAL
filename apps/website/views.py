@@ -31,3 +31,18 @@ class Projects(TemplateView):
         context['projects'] = ProjectModel.objects.all()
         context['year'] = datetime.now().year
         return  context
+    
+
+
+from django.shortcuts import render
+# handlers error
+
+
+def custom_500(request):
+    return render(request, '500.html', status=500)
+
+def custom_404(request,exception):
+    return render(request, '404.html', status=404)
+
+class PrivacyPolicy(TemplateView):
+    template_name ='privacyPolity.html'
