@@ -1,0 +1,37 @@
+{% extends "layouts/base.html" %}
+{% load tailwind_filters %}
+{% load static %}
+
+
+{% block content %}
+<div class="max-w-4xl mx-auto font-[sans-serif] p-6">
+    <div class="text-center mb-16">
+      
+      <h4 class="text-gray-800 text-base font-semibold mt-6">Registro de Super Administrador</h4>
+    </div>
+
+    <form action="" method="post">
+      <div class="grid sm:grid-cols-3 gap-8">
+        {{ form|crispy }}
+        {% comment %}
+        <div>
+            <label class="text-gray-800 text-sm mb-2 block">First Name</label>
+            <input name="name" type="text" class="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all" placeholder="Enter name" />
+        </div>
+        {% endcomment %} 
+        
+      </div>
+
+      <div class="!mt-12">
+        <button type="submit" class="py-3.5 px-7 text-sm font-semibold tracking-wider rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+          Registrar
+        </button>
+      </div>
+    </form>
+  </div>
+{% endblock content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type="submit">agregar</button>
+</form>

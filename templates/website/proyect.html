@@ -1,0 +1,150 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block title %}Proyectos{% endblock %}
+
+{% block content %}
+<div class="bg-gray-900 bg-opacity-75 w-full shadow-lg rounded-lg sm:px-0 sm:py-0 md:px-4 md:py-8 mb-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-10 md:px-20">
+    {% for project in projects %}
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+      <div class="relative">
+        <img class="w-full h-48 object-cover" src="{{project.photo.url}}">
+        <div class="absolute top-0 right-0 bg-indigo-500 text-white font-bold px-2 py-1 m-2 rounded-md">
+          <a href="{{project.urls}}">ver</a>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent pt-6 pb-2 px-3">
+          <div class="flex flex-wrap gap-1">
+            {% for tag in project.tags.all %}
+            <span class="bg-gray-800 text-white text-xs px-2 py-1 rounded-md">
+              {{tag}}{% if not forloop.last %}{% endif %}
+            </span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="p-4">
+        <div class="text-lg font-medium text-gray-800 mb-2">{{project.name}}</div>
+        <p class="text-gray-500 text-sm">
+          {{ project.description|slice:":50" }}{% if project.description|length > 50 %}...{% endif %}
+        </p>
+        {% if project.description|length > 50 %}
+        <button 
+          onclick="openModal('{{ project.name }}', '{{ project.description|escapejs }}' , '{{project.url_github}}')" 
+          class="text-indigo-500 hover:text-indigo-600 text-xs mt-1 focus:outline-none">
+          Ver más
+        </button>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="descriptionModal" class="fixed inset-0 bg-black opacity-0 invisible z-50 flex justify-center items-center transition-all duration-1000 ease-in-out">
+  <div id="modalContainer" class="bg-white rounded-lg max-w-lg w-full mx-4 overflow-hidden shadow-xl transform scale-90 opacity-0 transition-all duration-1000 ease-in-out">
+    <div class="px-6 py-4">
+      <div class="flex items-center justify-between mb-3">
+        <h3 id="modalTitle" class="text-xl font-semibold text-gray-800"></h3>
+        <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="modalContent" class="text-gray-600"></div>
+    </div>
+    <div class="bg-gray-50 px-6 py-3 flex justify-end">
+      <a id='url_github' href="" target="_blank" class="mx-4 bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-600 hover:to-gray-800 text-white font-bold py-2 px-4 rounded-lg shadow-lg transform transition hover:scale-105 duration-300 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+        GitHub
+      </a>
+      <button onclick="closeModal()" class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg transform transition hover:scale-105 duration-300 flex items-center gap-2">
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>
+
+{% include "website/footer.html" %}
+
+<style>
+  .modal-open {
+    opacity: 1;
+    visibility: visible;
+    background-opacity: 0.5;
+  }
+  
+  .modal-content-open {
+    transform: scale(1);
+    opacity: 1;
+  }
+</style>
+
+<script>
+  function openModal(title, content, url_github) {
+    const modal = document.getElementById('descriptionModal');
+    const modalContainer = document.getElementById('modalContainer');
+    
+    // Establecer contenido
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalContent').textContent = content;
+    document.getElementById('url_github').href = url_github;
+    
+    // Hacer visible el modal pero con opacidad 0
+    modal.classList.remove('invisible');
+    
+    // Pequeño retraso para asegurar que la transición funcione correctamente
+    setTimeout(() => {
+      // Animar el fondo
+      modal.classList.add('modal-open');
+      
+      // Animar el contenido con un pequeño retraso adicional
+      setTimeout(() => {
+        modalContainer.classList.add('modal-content-open');
+      }, 100);
+    }, 50);
+    
+    // Bloquear el scroll
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeModal() {
+    const modal = document.getElementById('descriptionModal');
+    const modalContainer = document.getElementById('modalContainer');
+    
+    // Iniciar animación de cierre
+    modalContainer.classList.remove('modal-content-open');
+    
+    // Pequeño retraso antes de ocultar el fondo
+    setTimeout(() => {
+      modal.classList.remove('modal-open');
+      
+      // Ocultar completamente después de la animación
+      setTimeout(() => {
+        modal.classList.add('invisible');
+      }, 900);
+    }, 100);
+    
+    // Reactivar scroll
+    document.body.style.overflow = 'auto';
+  }
+  
+  // Cerrar modal al hacer clic fuera de él
+  document.getElementById('descriptionModal').addEventListener('click', function(event) {
+    if (event.target === this) {
+      closeModal();
+    }
+  });
+  
+  // Cerrar modal al presionar Escape
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && !document.getElementById('descriptionModal').classList.contains('invisible')) {
+      closeModal();
+    }
+  });
+</script>
+{% endblock %}
