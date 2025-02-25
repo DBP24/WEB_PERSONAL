@@ -18,7 +18,8 @@ class Migration(migrations.Migration):
                 ('tema', models.CharField(max_length=150)),
                 ('start_date', models.DateField()),
                 ('end_date', models.DateField(blank=True, null=True)),
-                ('tiempo', models.TimeField()),
+                ('tiempo', models.IntegerField()),
+                # ('tiempo', models.TimeField()),
             ],
         ),
     ]

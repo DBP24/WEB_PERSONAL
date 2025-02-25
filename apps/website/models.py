@@ -37,7 +37,7 @@ class CapacityModel(models.Model):
     ie = models.CharField(max_length=150)
     tema = models.CharField(max_length=150)
     start_date = models.DateField()
-    tiempo = models.IntegerField()
+    tiempo_entero = models.IntegerField(default=0)
         
     def __str__(self):
         return f"{self.ie} - ({self.tema})"
